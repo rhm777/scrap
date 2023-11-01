@@ -1,0 +1,37 @@
+// may 19:   may 20 - aug 20-sep 1.
+
+
+/*
+    complete the ui feature. 
+    write reporting code in node-js.
+    implement web interface.
+    write specs for web implementation as discussed.
+    lear ml.
+    integrate with zorro/mql5 for strategy.
+    wk/trdg/ste.
+*/
+/*
+    notes: multiple acc may use different process. and receives data 
+    from domain socket.
+*/
+/*  
+    today may 19:
+    read current symbol , amout and duration it may be same.
+    when opening trade from net.
+        set id. return err_obj as { err: description: name: if any.}
+            e.g. symbol not found.  count exceeds, amount exceeds. invalid args.
+    intergrate with opt_pltfrm using call back.
+    following used  pending_open the new trade.
+    trade has status = 0.  status=1 opened  status=2 close status=3 completed. 
+    pltfrm fills the id and other available
+    information.
+    pending_close array sorted by time in ascending order. on completed queuries
+    the pltfrm. if success move to close_list.
+    in future many platform process  should be started using some script. 
+    and connect using domain socket.
+*/
+
+
+
+
+

@@ -1,0 +1,44 @@
+
+const message_obj = require("../message_obj")
+const socket_client  =   require ( "./socket_client")
+const trade_t        =   require ( "../trade_t" )
+// connect sends and closes.
+function forwarding_client ( serv_addr , serv_port , client_impl )
+{
+    this.serv_addr = serv_addr
+    this.serv_port = serv_port
+    this.client_impl = client_impl
+    this.socket_client  =  new socket_client ( this.serv_addr, this.serv_port , this )
+    this.socket_client.connect ()
+    
+}
+// call back by socket_client.
+forwarding_client.prototype.on_connection_open =  function ( client_socket )
+{
+   // let trade_obj = new trade_t ( 12345, "opt" , "macd_strategy_1_a")
+   // client_socket.send_object ( trade_obj , "sender" , "" )
+    this.client_impl.on_connection_open ( client_socket )
+}
+
+forwarding_client.prototype.on_data_receive = function ( client_socket , data )
+{
+   // console.log ( data.toString())
+    this.client_impl.on_data_receive ( client_socket , data )
+}
+
+forwarding_client.prototype.send_obj  =  function ( dir , name_ , obj )
+{
+    let msg_obj  =  new message_obj()
+    let msg      =  msg_obj.new_empty_object()
+    msg ["dir"] = dir ;  msg["name"] = name_ ;  msg["obj"] = obj;
+    this.socket_client.send_obj ( msg ) 
+}
+module.exports = forwarding_client
+
+/*
+let trade_sendr   =   new forwarding_client ( '127.0.0.1' , 7777 ) 
+let trade         =   new trade_t ( 12345 , "opt" )
+trade_sendr.send_obj ( "sender", "macd_strategy_2", trade )
+*/
+
+//trade_sendr.send_obj ( "sender", "macd_strategy_1", trade )

@@ -1,0 +1,192 @@
+nodejs-notes:
+    new_somefunc = somefunc.bind ( some_obj, args ); creates new_somefunc. which this as some_obj.
+    call apply executes a function.
+    e.g.   somefunc.call ( someobj , args ) would exec somefunc with someobj as this.
+           somefunc.apply ( someobj,arg_arr ) would exec somefunc with someobj and args as arr.
+    
+
+
+example of selectors:
+equals:
+
+contains:
+    "//a[contains(@class,'nt-card__headline')]"
+exact text:
+
+[attr*=value] - Represents elements with an attribute name of attr whose value contains at least one occurrence of value within the string.
+e.g. img[style*='object-fit: cover;']
+link: https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+https://www.tools4testing.com/contents/puppeteer/attribute-selector-in-puppeteer
+
+
+
+example of promise: 
+const sleep  = duration => new Promise ( (resolve) => setTimeout(resolve,duration));
+to call.  sleep(10000).then ().error();
+
+while (content.indexOf("scrapebot_description") < 0) {
+        console.log("looking for scrapebot_description")    
+        await new Promise((resolve)=>setTimeout(()=> resolve() ,1000));//self wait e.g.
+        content = await page.content();
+    }
+
+// evaluate functions example:
+        const image = await page.evaluate(() => {
+            document.querySelectorAll("img[style='object-fit: cover;']").forEach(img => {
+                let imageUrl = img.getAttribute('src');  // instead of getProperty.
+                imageArr.push(imageUrl)
+            })
+        })
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+example of xpath link clicking...
+const linkHandlers = await page_0.$x("//*[contains(text(), 'Assets')]");
+if (linkHandlers.length > 0) {
+  await linkHandlers[0].click();
+  console.log ( await pages[0].title() );
+
+} else {
+//  throw new Error("Link not found");
+}
+
+
+
+
+a promise object takes *function which will *run on task queue, whose resolve will
+call by queue manager, while await(callee) will be put on hold.
+promise has three states at any time e.g. pending, resolve, reject.
+
+const myPromise = new Promise((resolve, reject) => {
+  // do some blocking task which returns its value to waiting resolve.
+  // e.g. fetch(url)....  resolve ( response.data );
+});
+e.g. readfile can be put on callback.
+const mypromise = new Promise ( (resolve,reject)=>{
+    fs.readfile("afile", (err,data)=>{   // async data.
+        if ( err  ) reject ( error );
+        if ( data ) resolve ( data );
+    })
+});
+mypromise.then ( (data)=>console.log(data) ).catch((err)=>console.log(err));
+
+also, a function can be made to return a promise.
+
+const prm  = new Promise;    // create new obj. and pass a callback function with resolve,err as args.
+actually you wrapped your function in argument function, which after doing work calls 
+resolve or error.
+
+*Once you an async process has started, like an HTTP request, filesystem access, or something similar, 
+you are given something that will notify the caller when that process has completed. 
+A Promise is that "something".
+A promise is a placeholder for a value that will be available in the future.
+
+
+e.g. fetch_a_url would now become
+const fetch_    = new Promise ( (resolve,err)=> { data  = fetch_a_url; resolve(data);  });
+callee would do.
+fetch_ ( url ).then((data)=>...return code) .then ( (code)=>{}) . error((err)=>{})
+each then returns a promise.
+
+or try{ await fetch_ ; await process_code   } (error){}
+
+see e.g. promise_3_a where lock is implemented and lnk_data has been awaited by consumer
+and fetcher provides the resolver of lnk_data.
+
+
+*** consider following code:
+let consumerResolver = null
+
+function producer() {  if consumerResolver consumerResolver() }  //fullfill resolve call indirectly.
+function consumer() { let proms = new Promise((resolve,reject)=>{
+                consumerResolver = resolve;   // replace consumerResolver with resolve.
+                })}
+                await proms;
+promise is replace of call backs. call backs run async on queue.
+promise makes sync code ... async.
+promise has three states.
+a function returning promise object is a promise. if some function
+returns a promise , callee uses then or await.
+
+
+
+
+page object:
+Page object also provides methods to apply functions on located elements. 
+page.$eval(selectorExpression, pageFunction[, ...args])
+This method will apply the pageFunction on the first matching element and returns Promise with return value of pageFunction.
+
+page.$$eval(selectorExpression, pageFunction[, ...args])
+This method will apply the pageFunction on the all matching element and returns Promise with return value of pageFunction.
+
+
+Date reference.
+Date.now()   ts.
+new Date().toLocaleString() or new Date(ts).toLocaleString() prints 
+5/10/2022, 1:54:55 PM
+
+const now = new Date();  
+c.log ( now ) -----> Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)
+to get current time stamp.
+now.getTime()
+
+Date(arg) : arg is a timestamp.
+new Date();  new Date(ts); new Date(str); new Date(year,month,day,hour, min,sec,ms);
+e.g. program
+let now = new Date();  let epoch  =  new Date(0);
+let tm_str_1 = now.toString()
+let tm_str_2 = now.toLocaleString()
+console.log ( "full mil time w zone: " + now );
+console.log ( "locale string(non-mil): "  + now.toLocaleString() )
+console.log ( "time stamp: " + now.getTime() )
+console.log ( "epoch time: " + epoch );
+// e.g. of converting string to other formats.
+console.log ( " ---- " );
+console.log ( " --- "  + new Date(tm_str_2).toString() );
+console.log ( " --- " + new Date(tm_str_1).toLocaleString()  );
+getFullYear()  .... YYYY
+getMonth       .... 0-11
+getDate        .... 1-31 day of the month.
+getDay         .... 0-6  day of the week.
+getHours       .... 0-23 hour of the day.
+getMinutes          0-59 minutes of the hour.
+getSeconds          0-59 seconds of the minute.
+getMilliseconds     0-999   1000 of the second.
+getTime             milliseconds from the epoch or timestamp.
+const birthday = new Date(1980,6,31)
+birthday.getFullYear()  
+        .getMonth() etc.
+         .setFullYear(1981)
+to get utc components of the date...
+        .getUTCFullYear() etc.
+/// about formating time and adding to it.
+
+       
+let date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+// Request a weekday along with a long date
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+console.log(date.toLocaleString('de-DE', options));
+// → "Donnerstag, 20. Dezember 2012"
+// An application may want to use UTC and make that visible
+options.timeZone = 'UTC';
+options.timeZoneName = 'short';
+console.log(date.toLocaleString('en-US', options));
+// → "Thursday, December 20, 2012, GMT"
+// Sometimes even the US needs 24-hour time
+console.log(date.toLocaleString('en-US', { hour12: false }));
+// → "12/19/2012, 19:00:00"
+
+

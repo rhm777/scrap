@@ -1,0 +1,18 @@
+// complete the query and db_api to get data.  27,28  completed.
+// complete the reporting part.   
+// with api and logger.     may: 29 , 30,  31.
+// write the web interfacce with complete
+// html5, css, javascript.   june 7.
+// write the specs for the website along with 
+// the previous web interface with template implementation,
+// with faceting practise.  june 15.
+
+// intergrate mql5 and the option interface. 
+// complete the code for mql5 for previous indicator. 
+// bulk strategies and report needed. june 28
+// lear m.l and advance.   ----->
+// keep trying to find strategy and complete web project. aug 30.
+
+// framework for faceting.
+
+

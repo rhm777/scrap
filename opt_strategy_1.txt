@@ -1,0 +1,24 @@
+new connection arrived from 127.0.0.1_51430 time: 1650197869217 ts:4/17/2022, 5:17:49 PM
+---------------> data arrived for socket:127.0.0.1_51430 -- tm:1650197869258 tm_str:4/17/2022, 5:17:49 PMnew connection arrived from 127.0.0.1_51432 time: 1650197869268 ts:4/17/2022, 5:17:49 PM
+---------------> data arrived for socket:127.0.0.1_51432 -- tm:1650197869271 tm_str:4/17/2022, 5:17:49 PMnew connection arrived from 127.0.0.1_51434 time: 1650197869273 ts:4/17/2022, 5:17:49 PM
+---------------> data arrived for socket:127.0.0.1_51434 -- tm:1650197869274 tm_str:4/17/2022, 5:17:49 PMnew connection arrived from 127.0.0.1_51436 time: 1650197869278 ts:4/17/2022, 5:17:49 PM
+---------------> data arrived for socket:127.0.0.1_51436 -- tm:1650197869280 tm_str:4/17/2022, 5:17:49 PMconnection deleted from 127.0.0.1_51436 time: 1650197942475 ts:4/17/2022, 5:19:02 PM
+
+connection deleted from 127.0.0.1_51434 time: 1650197942482 ts:4/17/2022, 5:19:02 PM
+
+connection deleted from 127.0.0.1_51432 time: 1650197942489 ts:4/17/2022, 5:19:02 PM
+
+connection deleted from 127.0.0.1_51430 time: 1650197942492 ts:4/17/2022, 5:19:02 PM
+
+new connection arrived from 127.0.0.1_51438 time: 1650198144552 ts:4/17/2022, 5:22:24 PM
+---------------> data arrived for socket:127.0.0.1_51438 -- tm:1650198144552 tm_str:4/17/2022, 5:22:24 PMnew connection arrived from 127.0.0.1_51440 time: 1650198144555 ts:4/17/2022, 5:22:24 PM
+---------------> data arrived for socket:127.0.0.1_51440 -- tm:1650198144555 tm_str:4/17/2022, 5:22:24 PMnew connection arrived from 127.0.0.1_51442 time: 1650198144558 ts:4/17/2022, 5:22:24 PM
+---------------> data arrived for socket:127.0.0.1_51442 -- tm:1650198144559 tm_str:4/17/2022, 5:22:24 PMnew connection arrived from 127.0.0.1_51444 time: 1650198144561 ts:4/17/2022, 5:22:24 PM
+---------------> data arrived for socket:127.0.0.1_51444 -- tm:1650198144562 tm_str:4/17/2022, 5:22:24 PMconnection deleted from 127.0.0.1_51444 time: 1650198148378 ts:4/17/2022, 5:22:28 PM
+
+connection deleted from 127.0.0.1_51442 time: 1650198148378 ts:4/17/2022, 5:22:28 PM
+
+connection deleted from 127.0.0.1_51440 time: 1650198148379 ts:4/17/2022, 5:22:28 PM
+
+connection deleted from 127.0.0.1_51438 time: 1650198148380 ts:4/17/2022, 5:22:28 PM
+

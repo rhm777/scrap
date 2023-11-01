@@ -1,0 +1,24 @@
+{
+  "name": "scrap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simple_report.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node test_1.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-mutex": "^0.3.2",
+    "axios": "^0.26.1",
+    "moment": "^2.29.3",
+    "mongodb": "^4.6.0",
+    "mongoose": "^6.3.4",
+    "node-fetch": "^3.2.3",
+    "promise": "^8.1.0",
+    "pug": "^3.0.2",
+    "puppeteer": "^13.5.1"
+  }
+}

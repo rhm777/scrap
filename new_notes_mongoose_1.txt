@@ -1,0 +1,150 @@
+sudo systemctl start mongodb
+sudo systemctl status mongodb
+sudo systemctl stop mongodb
+
+// introduction.
+mongo   // client.
+show dbs
+use some_db
+show collections or show tables
+let r = db.collection_name.findOne()  or ... findOne()._id
+db  // show current database.
+
+to create a dbs ...
+use new_db_name   // show dbs will not show.
+to create a collection in db.
+use some_db_name
+db.new_collection_name.insert ( {"name":"john","age":22,"location":"colombo"})
+// collections strutures definition can be many. a search may bring many collections.
+// or
+db.createCollection("some_new_collection")
+// a limit collection can also be created.
+db.createCollection("mySecondCollection", {capped : true, size : 2, max : 2})
+// size: 2 mbs , max: document count. more than it. is circular.
+
+// to delete.
+
+
+// findMany() is not a function.
+// to insert values.
+db.employee.insertOne({})
+db.employee.insert( {})
+db.employee.insertMany( [{},])   // note []
+db.myCollection.find({}, _id: 0).pretty()  // hide field _id.
+db.testCollection.find().sort({name: 1})   // or -1.
+db.engineers.find({ age: ${ in: [ 20, 23, 24, 25 ]}})
+
+// to update databases.
+// first {} find and then use {$set:{age:23}}  // update count may be returned.
+db.myCollection.update({age : 20}, {$set: {age: 23}})
+db.myCollection.updateMany({age : 20}, {$set: {age: 23}})
+
+
+
+// to remove a field.
+// db.myCollection.update({name: "navindu"}, {$unset: age}); // not working.
+
+// all rows are removed.
+db.myCollection.remove({}); // collection will remained.
+db.myCollection.drop() // collection will be removed.
+db.myCollection.remove({name: "navindu"});   // remove a row.
+
+
+
+// to read/find values.
+use some_db
+db.collection_name.findOne() or find() or count() or find({key:'value',...})
+db.employee.find({ age : {$gte:39 } } ).pretty()   or $gt or $ne or $lt or $lte
+// and query example:  age < 25 and location = "colombo"
+db.myCollection.find({$and:[{age : {$lt : 25}}, {location: "colombo"}]});
+// example of regex for relation  like etc.
+
+// aggregation example.  relation: group by clause.
+db.myCollection.aggregate ( [{ $group: {} }] )
+
+// mongoose:
+// todo: what is mongo objectId.
+//       nodejs introspection.
+// install arrango db. for later use.
+// schema notes:
+/* String , Number , Date, Buffer, Boolean, Mixed, ObjectId,Array, Decimail128,Map
+   are derived from schemaType base class.
+   some_schema.path('field_name') instanceof mongoose.SchemaType ---> true
+                                                     .Schema.Types.String.
+
+*/
+
+// sort example.
+var customerObject = db.model('customers', customers);
+var query = {address: /^S/};
+var mysort = {name: -1};
+customerObject.find(query, function (err, result){console.log(result);}).sort(mysort);
+
+/* query examples */
+consider example:
+      for same field: (symbol="eurusd" or symbol="gbpusd") and price_close <= 39.0 (3 recs)
+      it becomes    { $or:[ {},{}]   }
+         or   --->  { $or:[  {condition_1}, { condition_2} ] }
+
+         first consider   symbol = "eurusd"
+then                 {} 
+for multple fields   add      {},{}  i.e. multiple clause.
+            gives     { $or:[{},{}]}
+            example  or  , {a}    pop is empty.
+                     or  , {b}    pop is {a} therefore,
+                         {a},{b}]}  then 
+                         { $or:[{a},{b}]}   
+
+
+// map type. see this link:https://stackoverflow.com/questions/28200502/map-in-mongoose
+// see mongoose_eg_4.js
+
+
+
+// may 22 - may 31: todo:
+practise with mongoose js api. e.g. connection , schema , model.
+and use model for small task.
+
+trade is natural format for saving , no schema is defined. if direct
+saved.
+
+reporting structure is as follows:
+   prf_lss_report...
+   simple_report...
+   advance_report...
+   complete_report.
+using inheritance.
+
+write to log files for trade in respective folder.
+use common_log to create directory using stack for folders.
+
+same is in database for web interface.
+
+use node templates for it.
+
+define complete website:  june 1..june 30.
+for step by step development.
+
+// skill todo: web development.
+// express ... pug.
+// mongoose.
+// arrangodb.
+// javascript.
+// react_api
+// templates.
+// design the website.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

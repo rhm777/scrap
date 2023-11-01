@@ -1,0 +1,76 @@
+// reference:
+// https://algodaily.com/lessons/class-vs-prototypical-inheritance
+// https://javascript.info/prototype-inheritance
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+
+// see inherit_eg_4.
+// what is function ( ... ) notation.
+
+// how is inheritance defined in javascript.
+// ecma 2016 and prototype approach.
+
+    class person
+        constructor(...){}
+    class student extends person
+        constructor(){ supert(...)}
+// to built upon existing objects.
+class DemoClass extends Date {
+   constructor(date) {
+   super(date);
+   }
+// prototype approach:
+inheritance is done by first sub classing and defining function using prototype.
+e.g.
+let parent = { foo: 'foo' }
+let child = { }
+Object.setPrototypeOf(child, parent)
+if child has same property as parent, if it is indefined then parent property
+is used.
+delete child.foo.
+child has its prototype. 
+child has pointer to parent prototype via its prototype. 
+which is searched if undefined.
+parent has its own prototype. which referred by child.prototype.
+
+Each object has its prototype. which has variables.
+and property __property__ which point to parent object.
+e.g. __proto__
+usually    Object.setPrototypeOf ( obj_1 , obj_2 )
+sets obj_1.__proto__  = obj_2   // from Object.
+prototype itself is array.
+the definition of inheritance.
+
+a Object has its __proto__ of null.
+each new object has its __proto__ to that of Object.
+Object has toString propert mapping toString().
+
+let   y  =  []    is equal to y = new Array()
+y.__proto__  will not be Object  but  Array.prototype. (or class definition for re_use.)
+a constructor property if present returns the constructor function of the object.
+y.__proto__ === Array.prototype
+y.__proto__ === Object.prototype
+or Array|Object.isPrototypeOf(y)
+y instanceof Array
+
+following is called constructor function.
+    function a (){}    but not  this.prop = function(){}
+
+following steps are taken.
+
+define base class.
+
+define derived class.
+    base.call ( this, args )     // base will initialize using given 'this' itself.
+                                 // thus args will become available in 'this' of drvd.
+Object.setPrototypeOf ( derived.prototype , base.prototype )  // set derived.prototype to that of base.
+                                          // to correct the protoype chain.
+to call the parent class function as in function inheritance.
+use:    base.prototype.func_name.call ( this )  // note base.call has initized this.
+// to non-inherit simple call that function due setPrototypeOf line.
+
+
+
+
+
+
+
