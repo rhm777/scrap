@@ -25,10 +25,12 @@ test_client.prototype.connection_err    =  function ( err )
 {
      console.log ( err.message )
 }
+
 test_client.prototype.connection_close  =  function ( )
 {
      console.log ( " connection is now closing ... " )
 }
+
 
 test_client.prototype.receive_data = function ( data )
 {
