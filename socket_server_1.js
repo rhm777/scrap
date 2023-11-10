@@ -78,21 +78,20 @@ class socket_server
                 client_addr  =  client_conn.get_client_address_str()
                 client_conn.on_data ( data )
             });
-
-                
+ 
             socket.on ( 'close' , ( data ) => { 
                 let client_conn  =  this.get_connection_from_socket ( socket )
                 client_addr  =  client_conn.get_client_address_str()
                 // broadcast message if required. or defined or needed.
                 client_conn.on_close ( )
                 this.remove_socket_connection ( client_conn )
-                this.broadcast_message ("[sever] - sock disconnected:" + client_addr )
+                this.broadcast_message ("[server] - sock disconnected:" + client_addr )
                 
                 //this.print()
             }); 
             // Add a 'error' event handler to this instance of socket 
             socket.on('error', (err) => { 
-                console.log(`Error occurred in ${clientAddress}: ${err.message}`); 
+                console.log(`Error occurred in ${this.client_addr} ${err.message}`); 
             });     
             
         });
@@ -126,8 +125,11 @@ class socket_connection
 
     send_msg ( msg )
     {
-        //console.log ( "[socket_handler]: sending message: " + msg )
-        this.socket.write ( msg )
+        console.log ( "[socket_handler]: sending message: " + msg )
+        console.log ( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$[client_socket] sending message..." + msg  );
+        this.socket.write ( msg + "\r\n")
+
+        //this.socket.flush()
     }
 
     extract_seq_str ( str )
@@ -139,11 +141,20 @@ class socket_connection
         let s   = str.substring(p+1,q)
         return s;    
     }
-    get_object_from_str ( str )
+    get_object_from_str ( replace , str )
     {
-        let s   =  str.replace ("[object]","").trim()
-        let obj = JSON.parse ( s )
+        //console.log ("replace: " + replace + " -- str: " + str )
+        let s   =  str.replace ("[" + replace + "]","").trim()
+        console.log ( "----s:" + s)
+        let obj = {}
+        try{
+          obj =  JSON.parse ( s )
+        }catch ( err ){console.log ("json parse error occured."); }
         return obj;
+    }
+    close ( )
+    {
+        this.socket.destroy()
     }
 }
 

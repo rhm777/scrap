@@ -1,3 +1,13 @@
+// todays task: 
+// *class for twitter posting with don't post = true. 2 hours.
+// *send message from the dispatcher to it.   30 mins.
+// intergrate it in networking socket server. 1 hr.
+// send message from network client.    1 hr.
+// send message from python.            1 hr.
+// 5 hrs.  till 4.30 p.m.
+// take rest.
+
+
 // this is a framework for dispatching messages to queue_worker , which
 // calls the user provided worker_thread_singleton implementation.
 // all message run one at a time by worker_thread_singleton.
@@ -79,9 +89,12 @@ class worker_thread_singleton
     }
     async run ()
     {
-        
         let busy = 0
-        let worker_thread_handler_ins = this.worker_thread_handler_impl.get_instance()
+        if ( this.worker_thread_handler_ins == undefined )
+        {
+            this.worker_thread_handler_ins = this.worker_thread_handler_impl.get_instance()
+            console.log ("######################### workerthreadhandler...")
+        }
         parentPort.on ("message" , async (message)=>
         { 
             console.log ( "")
@@ -114,12 +127,12 @@ class worker_thread_singleton
                 // consume the complete queue....
                 let queue_item = message["obj"]
                 //await this.process_queue_item ( queue_item["item"] )
-                await worker_thread_handler_ins.process_queue_item ( queue_item["item"])
+                await this.worker_thread_handler_ins.process_queue_item ( queue_item["item"])
                 console.log ( "^^^^^^^^^^^^^^^^^^^^[worker_2] finished one item...")
                 busy = 0
                 parentPort.postMessage ( this.create_queue_message("get_queue_length",{name:"none"}))
             }
-            worker_thread_handler_ins.on_message ( message )
+            this.worker_thread_handler_ins.on_message ( message )
         });
     }
     

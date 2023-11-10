@@ -97,12 +97,14 @@ class socket_client
     start ()
     {
         this.client = new net.Socket();
+        this.client.setNoDelay(true)
         this.client.connect ( this.port, this.host , this.on_connection.bind(this) )
         let client_ins   =  this.client_impl_name.get_instance ( this.client )
-
+        this.socket_conn_impl = client_ins
         this.client.on('data', function(data) {
             //console.log('\r\n[socket_client]----Received: ' + data);
             client_ins.on_data ( data )
+            this.data_recvd = 1
             //client.destroy(); // kill client after server's response
         });
         
@@ -111,57 +113,25 @@ class socket_client
             console.log('Connection closed');
         });
     }
-    
+    send_msg ( message )
+    {
+        console.log ( "data_recvd: " +this.data_recvd )
+        this.socket_conn_impl.send_msg ( message )   
+    }
+    close ( )
+    {
+        this.socket_conn_impl.close()
+    }
+}
+
+
    
-}
 
-class mql5_client extends socket_connection
-{
-    constructor ( socket )
-    {
-        super ( socket )
-    }
-    static get_instance ( socket )
-    {
-        return new mql5_client ( socket )
-    }
-
-    on_data ( data )
-    {
-        //console.log ( "[mql5_client] received data..." + data )
-        let d = String(data)
-        let command = this.extract_seq_str ( d )
-        console.log ( "command: " + command )
-        if ( command == "message_1" )
-        {
-            console.log ( d)
-        }
-        if ( command == "initial_message" )
-        {
-            console.log ( d )
-            let obj = {}
-            obj["key_1"] = "value_1"; 
-            obj["key_2"] = "value_2";
-            let str = "[object] " + JSON.stringify (obj)
-            console.log ( str )
-            this.send_msg ( str )
-            //this.send_msg ("[message_1][socket_client] client received the message...." )
-            //this.send_msg ("[query_time][socket_client] what time is it....." )
-        }
-        //if ( command == "query_time_answer" )
-        //{ console.log ( d ) }
-       
-    }
-    on_close ( )
-    {
-        console.log ( "[mql5_client] received close...")
-    }
-
-}
-
+module.exports = { socket_client , socket_connection }
 
 //const worker1 = new Worker ( "./twtr_pst_queue.js" )
 //worker1.on ( "message", ( j ) => { console.log("received: " + String(j) ) } )
+/*
 async function delay ( time )
 {
     return new Promise (  res => {
@@ -208,10 +178,8 @@ async function run ( )
     console.log ( {isMainThread} );
 }
 run().catch(err=>console.error(err))
+*/
 
-
-//var s_c  = new socket_client ( "127.0.0.1", 3001 , mql5_client )
-//s_c.start ()
 
 //let obj = {}
 //obj["key_1"] = "val_1";
