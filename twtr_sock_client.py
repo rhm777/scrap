@@ -6,13 +6,16 @@ host = "127.0.0.1"
 port = 3001
 
 client_socket = socket.socket()
-client_socket.connect ( (host , port) )
+client_socket.connect ( ( host , port ) )
 
 data = client_socket.recv(4096).decode()
 print ( "data_recvd(initial)" + data )
+
 obj =  {}
-obj["title"]   = "this is a test title_1..."
-obj["content"] = "this is a test content_1..."
+obj["title"]   = "this is a test title_31..."
+obj["content"] = "this is a test content_31..."
+obj["id"]      = 31
+
 ob  = {}   
 ob["message"]  = obj 
 

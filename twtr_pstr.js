@@ -44,12 +44,13 @@ class twtr_pstr
         let page = this.page
         
         if ( this.dont_submit == 1 || reload == 1){
-             page.reload()
+             //page.reload()
+             page.goto(base_url, {timeout:100000})
              reload = 0
         }
         
         let sel = "[data-testid=tweetTextarea_0] > div > div > div"
-        await page.waitForSelector(sel)
+        await page.waitForSelector(sel,{timeout:60000})
         await page.click ( sel )
         await page.type  ( sel , content[0] )
         await page.type  ( sel , content.substring(1,content.length))
@@ -91,7 +92,7 @@ class twtr_pstr
             await this.page.close()
     }
 }
-/*
+
 async function runner()
 {
     messages = [
@@ -112,6 +113,6 @@ async function runner()
     await sb.run(messages[3])
     console.log ( "done running....message_3")
 }
-runner()
-*/
+//runner()
+
 module.exports = { twtr_pstr }

@@ -7,10 +7,9 @@ messages = [
     {"title":"twitter post test_2","content":"this is a test content_2..."},
     {"title":"twitter post test_3","content":"this is a test content_3..."}
    ]
-wqd.dispatch_message ( messages[2] )
-wqd.dispatch_message ( messages[3] )
+//wqd.dispatch_message ( messages[2] )
+//wqd.dispatch_message ( messages[3] )
 
-/*
 class worker_queue_dispatcher
 {
     constructor ()
@@ -24,9 +23,9 @@ class worker_queue_dispatcher
     }
 }
 
-let w_q_d = new worker_queue_dispatcher()
-w_q_d.dispatch_message ( message[0] )
-*/
+//let w_q_d = new worker_queue_dispatcher()
+//w_q_d.dispatch_message ( message[0] )
+
 
 
 

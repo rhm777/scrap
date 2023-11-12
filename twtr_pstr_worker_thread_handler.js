@@ -37,6 +37,7 @@ class worker_thread_handler_twtr_pstr extends worker_thread_handler
         console.log ( "^^^^^^^^^^^^^[in item processing]processing queue item...[twtr pstr]: " + JSON.stringify(obj) );
         //require("fs").writeFile()
         console.log( "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>>>>message: " + JSON.stringify(message) )
+        //return 
         if ( this.twtr_pstr_ == undefined ){
             console.log( "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>>>>UNDEFINED "  )
             this.twtr_pstr_ = new twtr_pstr(true,1);

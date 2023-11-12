@@ -16,8 +16,13 @@ class puppeteer_base
 
     async create_browser ( )
     {
+        let exe_path = "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"
+        let data_dir  = "C://Users//xyz//AppData//Local//Google//Chrome//User Data//"
+        //let exe_path = "/opt/google/chrome/google-chrome"
+        //let data_dir = "/home/xyz/.config/google-chrome/Default"
+
         this.browser = await puppeteer.launch ( 
-            { ignoreDefaultArgs: ['--enable-automation'],args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"],headless:!this.visible, executablePath:"/opt/google/chrome/google-chrome", userDataDir:"/home/xyz/.config/google-chrome/Default"} )
+            { ignoreDefaultArgs: ['--enable-automation'],args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"],headless:!this.visible, executablePath:exe_path, userDataDir:data_dir} )
    
     }
     async get_new_page ( url )
@@ -31,7 +36,8 @@ class puppeteer_base
           //  'accept-language': 'en-US,en;q=0.9,en;q=0.8' 
         //});
         console.log ( "--new page loaded for url:" + url + "---" + await page.title())
-        await page.goto ( url ,{waitUntil: ['domcontentloaded']} )
+        page.setDefaultNavigationTimeout ( 0 )
+        await page.goto ( url  )
         this.page = await page
         return page
     }

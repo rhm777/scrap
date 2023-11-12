@@ -54,8 +54,8 @@ class mql5_twtr_server_conn extends socket_connection
             console.log ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX message: " + JSON.stringify(message) )
             //this.q_w_d.dispatch_message ( message )
             // here add socket forwarding to twitter. dispatcher.
-            
-            var stream = require("net").connect('/tmp/test.sock');
+            const pipePath = '\\\\.\\pipe\\my_pipe';
+            var stream = require("net").connect(pipePath);
             //obj = {"title":"twitter post test_5","content":"this is a test content_5..."}
             //obj_str = JSON.stringify ( obj )
             stream.write ( JSON.stringify(message) );
@@ -86,7 +86,7 @@ class mql5_twtr_server_conn extends socket_connection
 // how , implement the singleton class. in constructor. then used it to 
 // send the messsage.
 sock_conn  =  new mql5_twtr_server_conn();
-let s_s    =  new socket_server ( "localhost", 3001, 100 , mql5_twtr_server_conn )
+let s_s    =  new socket_server ( "127.0.0.1", 3001, 100 , mql5_twtr_server_conn )
 s_s.start( )
 
 //on_data_handler = sock_handler.on_data.bind(socket_handler)

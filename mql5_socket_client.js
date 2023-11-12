@@ -1,4 +1,4 @@
-const { json } = require("express")
+//const { json } = require("express")
 let { socket_client  , socket_connection }  = require ("./socket_client.js")
 //let { socket_server , socket_connection } = require("./socket_server_1");
 
@@ -63,19 +63,19 @@ class mql5_client extends socket_connection
         //this.socket_connection.send_msg ( message )
     }
 }  
-let message    =  { "title":"this is a title_6", "content":"this is test content_6","id":"6"}
-let message_0  =  { "title":"this is a title_7", "content":"this is test content_7","id":"7"}
-let message_1  =  { "title":"this is a title_8", "content":"this is test content_8","id":"8"}
+let message    =  { "title":"this is a title_1", "content":"this is test content_1","id":"6"}
+let message_0  =  { "title":"this is a title_2", "content":"this is test content_2","id":"7"}
+let message_1  =  { "title":"this is a title_3", "content":"this is test content_3","id":"8"}
 
 function send_msg (mess)
 {
-    var s_c      =  new socket_client ( "127.0.0.1", 3001 , mql5_client )
+    var s_c      =  new socket_client ( "localhost", 3001 , mql5_client )
     s_c.start ()
     s_c.send_msg ( { "message":mess } )
 }
-send_msg ( message   )
+send_msg ( message )
 send_msg ( message_0 )
-send_msg ( message_1 )
+send_msg ( message_1  )
 
 //s_c.close()
 //s_c_0      =  new socket_client ( "127.0.0.1", 3001 , mql5_client )

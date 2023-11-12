@@ -39,7 +39,10 @@ var server = net.createServer(function(stream) {
      // server.close();
     });
   });
-server.listen('/tmp/test.sock');
+
+const pipePath = '\\\\.\\pipe\\my_pipe';
+server.listen ( pipePath )
+//server.listen('/tmp/test.sock');
 
 
 //module.exports = { twtr_pstr_queue_worker_dispatcher }
