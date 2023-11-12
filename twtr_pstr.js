@@ -114,5 +114,5 @@ async function runner()
     console.log ( "done running....message_3")
 }
 //runner()
-
+console.log ( process.platform )
 module.exports = { twtr_pstr }

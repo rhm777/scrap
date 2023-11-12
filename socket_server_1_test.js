@@ -54,8 +54,13 @@ class mql5_twtr_server_conn extends socket_connection
             console.log ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX message: " + JSON.stringify(message) )
             //this.q_w_d.dispatch_message ( message )
             // here add socket forwarding to twitter. dispatcher.
-            const pipePath = '\\\\.\\pipe\\my_pipe';
+
+            let pipePath = '/tmp/test.sock'
+            if ( process.platform == "win32" )
+                pipePath = '\\\\.\\pipe\\my_pipe';
+            
             var stream = require("net").connect(pipePath);
+            
             //obj = {"title":"twitter post test_5","content":"this is a test content_5..."}
             //obj_str = JSON.stringify ( obj )
             stream.write ( JSON.stringify(message) );

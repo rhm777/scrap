@@ -16,11 +16,15 @@ class puppeteer_base
 
     async create_browser ( )
     {
-        let exe_path = "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"
-        let data_dir  = "C://Users//xyz//AppData//Local//Google//Chrome//User Data//"
-        //let exe_path = "/opt/google/chrome/google-chrome"
-        //let data_dir = "/home/xyz/.config/google-chrome/Default"
+        // linux freebsd openbsd
+        let exe_path = "/opt/google/chrome/google-chrome"
+        let data_dir = "/home/xyz/.config/google-chrome/Default"
 
+        if ( process.platform == "win32" ){
+            exe_path = "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"
+            data_dir  = "C://Users//xyz//AppData//Local//Google//Chrome//User Data//"
+        }
+        
         this.browser = await puppeteer.launch ( 
             { ignoreDefaultArgs: ['--enable-automation'],args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"],headless:!this.visible, executablePath:exe_path, userDataDir:data_dir} )
    

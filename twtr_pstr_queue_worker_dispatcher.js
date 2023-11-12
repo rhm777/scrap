@@ -40,7 +40,11 @@ var server = net.createServer(function(stream) {
     });
   });
 
-const pipePath = '\\\\.\\pipe\\my_pipe';
+let pipePath = '/tmp/test.sock'
+
+if ( process.platform == "win32" )
+    pipePath = '\\\\.\\pipe\\my_pipe';
+
 server.listen ( pipePath )
 //server.listen('/tmp/test.sock');
 
